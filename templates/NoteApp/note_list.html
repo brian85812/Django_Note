@@ -1,0 +1,30 @@
+<h1>筆記</h1>
+
+{% if object_list.count > 0 %}
+<table border="1">
+<thead>
+    <tr>
+    <th>標題</th>
+    <th>內容</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    </tr>
+</thead>
+<tbody>
+    {% for note in object_list %}
+    <tr>
+    <td>{{ note.title }}</td>
+    <td>{{ note.content|slice:":10" }}</td>
+    <td><a href="{% url 'note_view' note.id %}">查看詳情</a></td>
+    <td><a href="{% url 'note_edit' note.id %}">編輯</a></td>
+    <td><a href="{% url 'note_delete' note.id %}">刪除</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>目前暫無筆記</p>
+{% endif %}
+
+<a href="{% url 'note_new' %}">New</a>
